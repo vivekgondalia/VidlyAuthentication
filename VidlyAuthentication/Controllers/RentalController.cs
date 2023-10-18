@@ -10,7 +10,7 @@ namespace VidlyAuthentication.Controllers
     {
         public ActionResult New()
         {
-            return View();
+            return View("");
         }
     }
 }
