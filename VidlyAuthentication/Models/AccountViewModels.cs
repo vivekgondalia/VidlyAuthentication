@@ -83,6 +83,9 @@ namespace VidlyAuthentication.Models
         [Required]
         [Display(Name="Driving License")]
         public string DrivingLicense { get; set; }
+
+        [Required]
+        public string Phone { get; set; }
     }
 
     public class ResetPasswordViewModel

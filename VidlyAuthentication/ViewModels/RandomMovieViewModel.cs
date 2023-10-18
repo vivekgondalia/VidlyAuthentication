@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using VidlyAuthentication.Models;
 
-namespace Vidly.ViewModels
+namespace VidlyAuthentication.ViewModels
 {
     public class RandomMovieViewModel
     {

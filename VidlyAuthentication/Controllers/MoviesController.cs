@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VidlyAuthentication.Models;
-using Vidly.ViewModels;
+using VidlyAuthentication.ViewModels;
 
 namespace Vidly.Controllers
 {
@@ -43,6 +43,7 @@ namespace Vidly.Controllers
             return View("MovieForm", viewModel);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie) 
@@ -93,6 +94,22 @@ namespace Vidly.Controllers
             return View(movie);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
+        public ActionResult Edit(int id)
+        {
+            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+
+            var viewModel = new MovieViewModel(movie)
+            {
+                Genres = _context.Genres.ToList()
+            };
+
+            return View("MovieForm", viewModel);
+        }
+
         //private IEnumerable<Movie> GetMovies() 
         //{ 
         //    return new List<Movie>
@@ -121,21 +138,6 @@ namespace Vidly.Controllers
             };
 
             return View(viewModel);
-        }
-
-        public ActionResult Edit(int id) 
-        {
-            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
-
-            if (movie == null)
-                return HttpNotFound();
-
-            var viewModel = new MovieViewModel(movie)
-            {
-                Genres = _context.Genres.ToList()
-            };
-
-            return View("MovieForm", viewModel);
         }
 
 

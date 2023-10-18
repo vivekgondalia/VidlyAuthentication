@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VidlyAuthentication.Models;
-using Vidly.ViewModels;
+using VidlyAuthentication.ViewModels;
 
 namespace Vidly.Controllers
 {
