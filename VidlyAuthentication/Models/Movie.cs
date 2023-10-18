@@ -29,5 +29,9 @@ namespace VidlyAuthentication.Models
         [Range(1, 20)]
         public byte NumberInStock { get; set; }
 
+        [Display(Name = "Available in Stock")]
+        [Range(1, 20)]
+        public byte NumberAvailable { get; set; }
+
     }
 }

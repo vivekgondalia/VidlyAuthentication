@@ -229,6 +229,10 @@
     <Compile Include="Migrations\202310181547310_AddRentalDomainModel.Designer.cs">
       <DependentUpon>202310181547310_AddRentalDomainModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202310181604476_AddNumberAvailableToMovie.cs" />
+    <Compile Include="Migrations\202310181604476_AddNumberAvailableToMovie.Designer.cs">
+      <DependentUpon>202310181604476_AddNumberAvailableToMovie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -449,6 +453,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202310181547310_AddRentalDomainModel.resx">
       <DependentUpon>202310181547310_AddRentalDomainModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310181604476_AddNumberAvailableToMovie.resx">
+      <DependentUpon>202310181604476_AddNumberAvailableToMovie.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
