@@ -54,22 +54,13 @@ namespace VidlyAuthentication.Controllers.Api
         [HttpPost]
         public IHttpActionResult CreateRental(NewRentalDto newRental)
         {
-            //Edge Case 1
-            if (newRental.MovieIds.Count == 0)
-                return BadRequest("No Movie Ids have been given.");
-            //Edge Case 2
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == newRental.CustomerId);
-            if (customer == null)
-                return BadRequest("Invalid Customer ID");
+            var customer = _context.Customers.Single(c => c.Id == newRental.CustomerId);
 
             var movies = _context.Movies.Where(m => newRental.MovieIds.Contains(m.Id)).ToList();
-            //Edge Case 3
-            if (movies.Count != newRental.MovieIds.Count)
-                return BadRequest("One or more MovieIds are invalid.");
 
             foreach (var movie in movies)
             {
-                //Edge Case 4
+                //Edge Case 4 - avoid movie being a negative number
                 if (movie.NumberAvailable == 0)
                     return BadRequest("Movie is not available.");
 
