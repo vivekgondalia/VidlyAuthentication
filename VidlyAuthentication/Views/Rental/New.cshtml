@@ -89,10 +89,10 @@
                     data: vm
                 })
                     .done(function () {
-                        console.log("ajax-done");
+                        toastr.success("Rentals successfully recorderd.");
                     })
-                    .fail(function () {
-                        console.log("ajax-fail");
+                    .fail(function () {;
+                        toastr.error("Something unexpected happened.");
                     });
             });
         });
