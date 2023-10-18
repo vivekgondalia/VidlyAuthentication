@@ -54,6 +54,7 @@ namespace VidlyAuthentication.Controllers.Api
         [HttpPost]
         public IHttpActionResult CreateRental(NewRentalDto newRental)
         {
+            //FAT METHOD BELOW - Needs a refactor
             var customer = _context.Customers.Single(c => c.Id == newRental.CustomerId);
 
             var movies = _context.Movies.Where(m => newRental.MovieIds.Contains(m.Id)).ToList();
