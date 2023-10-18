@@ -1,0 +1,112 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using VidlyAuthentication.Models;
+using VidlyAuthentication.Dtos;
+
+namespace VidlyAuthentication.Controllers.Api
+{
+    public class RentalsController : ApiController
+    {
+        private ApplicationDbContext _context;
+
+        public RentalsController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        //GET /api/rentals
+        public IHttpActionResult GetRentals()
+        {
+            //Input : What is the Customer Id and return all the rentals?
+            //Output : List of all the movies that user has rented
+            
+
+            //var moviesDtos = _context.Movies
+            //    .Include(m => m.Genre)
+            //    .ToList()
+            //    .Select(Mapper.Map<Movie, MovieDto>);
+
+            return Ok();
+        }
+
+        //GET /api/rentals/1
+        public IHttpActionResult GetRental(int id)
+        {
+            //Input : Indidual rentalId
+            //Output : Rented Movie Details
+
+            //var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+
+            //if (movie == null)
+            //    return NotFound();
+
+            ////Mapping Objects
+            //var movieDto = Mapper.Map<Movie, MovieDto>(movie);
+            return Ok();
+        }
+
+        //POST /api/rentals
+        //[Authorize(Roles = RoleName.CanManageMovies)]
+        [HttpPost]
+        public IHttpActionResult CreateRental(NewRentalDto newRental)
+        {
+            //Input: RentalDto - CustomerInfo and MovieInfo
+            //Output: Created()
+
+            //if (!ModelState.IsValid)
+            //    return BadRequest();
+
+            ////Mapping Objects
+            //var movie = Mapper.Map<MovieDto, Movie>(movieDto);
+            //_context.Movies.Add(movie);
+            //_context.SaveChanges();
+
+            //movieDto.Id = movie.Id;
+            //return Created(new Uri(Request.RequestUri + "/" + movie.Id), movieDto);
+            return Ok();
+        }
+
+        //PUT /api/rentals/1
+        //[Authorize(Roles = RoleName.CanManageMovies)]
+        [HttpPut]
+        public IHttpActionResult UpdateRental(int id, MovieDto movieDto)
+        {
+            //Input : rentalId and movieId
+
+            //if (!ModelState.IsValid)
+            //    return BadRequest();
+
+            //var movieInDb = _context.Movies.SingleOrDefault(m => m.Id == id);
+
+            //if (movieInDb == null)
+            //    return NotFound();
+
+            ////Mapping to an existing object
+            //Mapper.Map(movieDto, movieInDb);
+            //_context.SaveChanges();
+
+            return Ok();
+        }
+
+        //DELETE /api/rentals/1
+        //[Authorize(Roles = RoleName.CanManageMovies)]
+        [HttpDelete]
+        public IHttpActionResult DeleteRental(int id)
+        {
+            //var movieInDb = _context.Movies.SingleOrDefault(m => m.Id == id);
+
+            //if (movieInDb == null)
+            //    return NotFound();
+
+            //_context.Movies.Remove(movieInDb);
+            //_context.SaveChanges();
+
+            return Ok();
+        }
+
+    }
+}
