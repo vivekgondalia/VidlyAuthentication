@@ -24,12 +24,15 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
-        public ActionResult Index(int? pageIndex, string sortBy)
+        public ViewResult Index()
         {
-            //var moviesDtos = _context.Movies.Include(m => m.Genre).ToList(); 
-            return View();
+            if (User.IsInRole(RoleName.CanManageMovies))
+                return View("List");
+
+            return View("ReadOnlyList");
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var genreTypes = _context.Genres.ToList();
