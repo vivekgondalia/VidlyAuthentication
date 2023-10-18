@@ -54,19 +54,25 @@ namespace VidlyAuthentication.Controllers.Api
         [HttpPost]
         public IHttpActionResult CreateRental(NewRentalDto newRental)
         {
-            //Input: RentalDto - CustomerInfo and MovieInfo
-            //Output: Created()
-
-            //Assuming that user will send valid CustomerId
+            //Edge Case 1
+            if (newRental.MovieIds.Count == 0)
+                return BadRequest("No Movie Ids have been given.");
+            //Edge Case 2
             var customer = _context.Customers.SingleOrDefault(c => c.Id == newRental.CustomerId);
-
             if (customer == null)
                 return BadRequest("Invalid Customer ID");
 
-            var movies = _context.Movies.Where(m => newRental.MovieIds.Contains(m.Id));
+            var movies = _context.Movies.Where(m => newRental.MovieIds.Contains(m.Id)).ToList();
+            //Edge Case 3
+            if (movies.Count != newRental.MovieIds.Count)
+                return BadRequest("One or more MovieIds are invalid.");
 
             foreach (var movie in movies)
             {
+                //Edge Case 4
+                if (movie.NumberAvailable == 0)
+                    return BadRequest("Movie is not available.");
+
                 movie.NumberAvailable--;
 
                 var rental = new Rental
