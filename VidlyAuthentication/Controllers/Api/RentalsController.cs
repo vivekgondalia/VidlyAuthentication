@@ -57,16 +57,28 @@ namespace VidlyAuthentication.Controllers.Api
             //Input: RentalDto - CustomerInfo and MovieInfo
             //Output: Created()
 
-            //if (!ModelState.IsValid)
-            //    return BadRequest();
+            //Assuming that user will send valid CustomerId
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == newRental.CustomerId);
 
-            ////Mapping Objects
-            //var movie = Mapper.Map<MovieDto, Movie>(movieDto);
-            //_context.Movies.Add(movie);
-            //_context.SaveChanges();
+            if (customer == null)
+                return BadRequest("Invalid Customer ID");
 
-            //movieDto.Id = movie.Id;
-            //return Created(new Uri(Request.RequestUri + "/" + movie.Id), movieDto);
+            var movies = _context.Movies.Where(m => newRental.MovieIds.Contains(m.Id));
+
+            foreach (var movie in movies)
+            {
+                var rental = new Rental
+                {
+                    Customer = customer,
+                    Movie = movie,
+                    DateRented = DateTime.Now
+                };
+
+                _context.Rentals.Add(rental);
+            }
+
+            _context.SaveChanges();
+
             return Ok();
         }
 
